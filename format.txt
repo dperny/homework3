@@ -1,0 +1,8 @@
+Each line in the file is a token line.
+
+A token line:
+    * Contains one or more tokens
+    * Is delimited by whitespace
+
+
+Each token in a token line is of the form 'type:value' (without the quotes).
