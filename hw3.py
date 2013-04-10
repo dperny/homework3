@@ -1,41 +1,29 @@
-import string
-
+import string, sys
 class Token(object):
     def __init__(self, ttype, value):
         self.__type = ttype
         self.__value = value
     def __str__(self):
         return '(' + self.__type + ',\'' + str(self.__value) + '\')'
-
-def read_tokens(filename):
-    tokens = []
-    with open(filename) as fp:
-        token = ["",""]
-        side = 0
-        tokenlist = []
-        char = fp.read(1)
-        while not char == "":
-            if char == " " or char == "\n":
-                if not token[side] == "" and side == 1:
-                    tokenlist.append(Token(token[0],token[1]))
-                    token = ["",""]
-                    side = 0
-            elif char == ":": side = 1 
+def read_tokens(fn):
+    with open(fn) as f:
+        t=["",""];s=0;tl=[]
+        c=f.read(1)
+        while c!="":
+            if c==" " or c=="\n":
+                if not t[s]=="" and s==1:
+                    tl.append(Token(t[0],t[1]));t = ["",""];s = 0
+            elif c == ":": side=1 
             else:
-                token[side] = token[side] + char
+                t[s] = t[s] + c
             char = fp.read(1)
-    return tokenlist
-    
-def main(argv):
-    argc = len(argv)
-    if 2 > argc:
-        print('Usage: python3 hw3.py input.txt')
-        return 1
+    return tl    
+def main(a):
+    c = len(a)
+    if 2>c:
+        print('Usage: python3 hw3.py input.txt'); return 1
     tokens = read_tokens(argv[1])
-    for token in tokens:
-        print(token)
+    for token in tokens: print(token)
     return 0
-    
-import sys
 if __name__ == '__main__':
     sys.exit(main(sys.argv))
